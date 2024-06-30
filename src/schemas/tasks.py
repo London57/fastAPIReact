@@ -1,9 +1,14 @@
 from pydantic import BaseModel
 
 
-class UserSchema(BaseModel):
+class TaskSchema(BaseModel):
     id: int
-    name: str
+    title: str
+    author_id: int
+    assignee_id: int
 
-class UserSchemaAdd(BaseModel):
-    name: str
+class TaskSchemaAdd(BaseModel):
+    title: str
+    author_id: int
+    assignee_id: int
+    
