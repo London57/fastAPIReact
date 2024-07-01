@@ -33,4 +33,5 @@ class SQLAlchemyRepository(AbstractRepository):
             res = await session.execute(statement)
             print(f"res in rep->base: {res}")
             res = [row[0].to_read_model() for row in res.all()]
+            print(f"res in repo->base->find_all: {res}")
             return res
