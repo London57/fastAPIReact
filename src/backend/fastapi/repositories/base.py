@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 
 from sqlalchemy import insert, select
-
-from db.db import async_session_maker, Base
+from db.db import async_session_maker
 
 
 class AbstractRepository(ABC):
@@ -18,20 +17,19 @@ class AbstractRepository(ABC):
 class SQLAlchemyRepository(AbstractRepository):
     model = None
 
-    async def add_one(self, data: dict) -> int:
+    async def add_one(self, data: dict):
         async with async_session_maker() as session:
             statement = insert(self.model)\
-                    .values(**data)\
-                    .returning(self.model.id)
+                    .values(**data)
             res = await session.execute(statement)
             await session.commit()
-            return res
+            print('res in repo->add_one')
+            return res.lastrowid
         
     async def find_all(self):
         async with async_session_maker() as session:
             statement = select(self.model)
             res = await session.execute(statement)
-            print(f"res in rep->base: {res}")
             res = [row[0].to_read_model() for row in res.all()]
-            print(f"res in repo->base->find_all: {res}")
+            print(f"res in repo->find_all: {res}")
             return res
