@@ -1,8 +1,32 @@
 
+import Form from './forms/Form.jsx'
+import Button from './components/Button.jsx'
+import UserList from './components/userList/UserList.jsx'
+import { useMemo } from 'react'
+
+import { useState} from 'react'
+
+
 export default function App() {
+  const [content, setContent] = useState("Click on button")
+
+  const memoUserList = useMemo(() => (
+    <UserList />
+  ), [])
+
+  function handleClick(text) {
+    setContent(text)
+  }
+  
   return (
-    <div>
-      <h1>first component</h1>
-    </div>
+   <>
+      
+      {memoUserList}
+      
+      <Button text="first" onclick={() => handleClick('first')}/>
+      <Button text="second" onclick={() => handleClick('second')} />
+      <p>{content}</p>
+      <Form fields={['name', 'last_name']} />
+  </> 
   )
 }
