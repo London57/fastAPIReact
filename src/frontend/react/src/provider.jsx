@@ -1,4 +1,3 @@
-import { Children } from 'react'
 import {QueryClientProvider, QueryClient} from 'react-query'
 
 const queryClient = new QueryClient()
