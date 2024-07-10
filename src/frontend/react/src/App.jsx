@@ -9,24 +9,21 @@ import NewUserFormModal from './components/modals/newUserFormModal/NewUserFormMo
 import Form from './components/forms/base/Form.jsx'
 
 export default function App() {
-  const [content, setContent] = useState("Click on button")
-
-  const memoUserList = useMemo(() => (
-    <UserList />
-  ), [])
+  const [page, setPage] = useState('userList')
+  // const memoUserList = useMemo(() => (
+  //   <UserList />
+  // ), [])
 
   function handleClick(text) {
     setContent(text)
   }
   
+
   return (
    <>
       <NewUserFormModal />
-      {memoUserList}
-      
-      <Button text="first" onclick={() => handleClick('first')}/>
-      <Button text="second" onclick={() => handleClick('second')} />
-      <p>{content}</p>
+     <UserList />
+      {/* {memoUserList} */}
       <Form fields={['name', 'last name']} />
   </> 
   )

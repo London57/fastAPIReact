@@ -30,14 +30,13 @@ export default function UserList() {
     Object.values(data.data).map((value, _) => {
         let {id, name} = value
         // listOfusers.push([id, name])
-        let card = <div className="card" style={{width: "18rem"}}>
-        <img className="card-img-top" alt="Card image cap" src='...'/>
-        <div className="card-body">
-        <div key={id} className="userCard">
+        
+        let card = <div key={id} style={{width: "18rem"}}>
+        <img className="card-img"/>
+        <div className="userCard">
                 <p className='id'>id: {id}</p>
                 <p className='name'>name: {name}</p>
             </div>
-        </div>
         </div>
         listOfusers.push(card)
     }) 
