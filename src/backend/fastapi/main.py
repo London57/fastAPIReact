@@ -1,22 +1,24 @@
 import uvicorn
-from  fastapi import FastAPI
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-
 from contextlib import asynccontextmanager
+
 from db.db import create_tables, drop_tables
 from api.routers import all_routers
 
+from auth.users import fastapi_users
+from auth.schemas import CreateUserSchema, ReadUserSchema
 
 
 @asynccontextmanager
 async def lifespan(app):
     await create_tables()
     yield
+    import sys
+    sys.exit()
 
 
 app = FastAPI(
-    title='аналог Asana',
     lifespan=lifespan
 )
 
@@ -29,11 +31,14 @@ app.add_middleware(
     allow_headers=['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
 )
 
-
 for router in all_routers:
     app.include_router(router)
 
-
+app.include_router(
+    fastapi_users.get_register_router(ReadUserSchema, CreateUserSchema), # first param: response_model
+    prefix='/auth',
+    tags=['Auuth'],
+)
 
 
 if __name__ == "__main__":
