@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from db.db import create_tables, drop_tables
 from api.routers import all_routers
 
-from auth.users import fastapi_users
+from auth.users import fastapiUsers
 from auth.schemas import CreateUserSchema, ReadUserSchema
 
 
@@ -35,7 +35,7 @@ for router in all_routers:
     app.include_router(router)
 
 app.include_router(
-    fastapi_users.get_register_router(ReadUserSchema, CreateUserSchema), # first param: response_model
+    fastapiUsers.get_register_router(ReadUserSchema, CreateUserSchema), # first param: response_model
     prefix='/auth',
     tags=['Auuth'],
 )
