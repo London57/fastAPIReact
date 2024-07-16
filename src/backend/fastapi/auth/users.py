@@ -7,4 +7,4 @@ from .manager.depends import get_user_manager
 
 fastapiUsers = FastAPIUsers[User, uuid.UUID](get_user_manager, [auth_backend])
 
-current_user = fastapiUsers.current_user(active=True)
+current_active_user = fastapiUsers.current_user(active=True)

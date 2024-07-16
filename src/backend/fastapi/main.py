@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from db.db import create_tables, drop_tables
 from api.routers import all_routers
 
+from auth.backend import auth_backend
 from auth.users import fastapiUsers
 from auth.schemas import CreateUserSchema, ReadUserSchema
 
@@ -40,6 +41,11 @@ app.include_router(
     tags=['Auuth'],
 )
 
+app.include_router(
+    fastapiUsers.get_auth_router(auth_backend),
+    prefix="/auth/jwt",
+    tags=["auth"],
+)
 
 if __name__ == "__main__":
     uvicorn.run(app="main:app", reload=True, port=8080)

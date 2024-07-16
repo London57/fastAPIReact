@@ -1,5 +1,5 @@
 from typing import Annotated
-from pydantic import BaseModel, EmailStr, field_validator, ValidationError, Field
+from pydantic import Field
 from fastapi_users.schemas import BaseUserCreate, BaseUser
 import uuid
 
