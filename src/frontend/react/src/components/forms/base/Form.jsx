@@ -1,7 +1,8 @@
 import axios from "axios"
 
+import '../RegistrationForm/RegistrationForm.css'
 
-export default function Form({fields, url_to_send_form}) {
+export default function Form({fields, url_to_send_form, classname}) {
     let formFields
     if(fields.length > 1) {
         formFields = Object.values(fields).map((field, index) => (
@@ -32,7 +33,7 @@ export default function Form({fields, url_to_send_form}) {
 
     let form = 
     <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={classname}>
             {formFields}
         <button type="submit">submit</button>
         </form>

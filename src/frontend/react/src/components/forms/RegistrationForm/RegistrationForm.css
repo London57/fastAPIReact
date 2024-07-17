@@ -1,0 +1,9 @@
+.form {
+	position:absolute;
+	margin-top:20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 4em 5em;
+	border: 1.5px solid black;
+	border-radius: 1em;
+}

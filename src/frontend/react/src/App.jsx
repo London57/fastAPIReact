@@ -1,30 +1,20 @@
+import RegistrationForm from './components/forms/RegistrationForm/RegistrationForm.jsx'
 
-import Button from './components/buttons/base/Button.jsx'
-import UserList from './components/userList/UserList.jsx'
-import { useMemo } from 'react'
+import Menu from './components/menu/Menu.jsx'
 
-import { useState} from 'react'
-
-import NewUserFormModal from './components/modals/newUserFormModal/NewUserFormModal.jsx'
-import Form from './components/forms/base/Form.jsx'
+import { useState } from 'react'
 
 export default function App() {
-  const [page, setPage] = useState('userList')
-  // const memoUserList = useMemo(() => (
-  //   <UserList />
-  // ), [])
-
-  function handleClick(text) {
-    setContent(text)
-  }
-  
-
+  const [menuState, setMenuState] = useState('Tasks')
   return (
    <>
-      <NewUserFormModal />
-     <UserList />
-      {/* {memoUserList} */}
-      <Form fields={['name', 'last name']} />
+   <Menu active={menuState} changeF={(currentActive) => setMenuState(currentActive)} />
+   {menuState === 'Tasks' && (
+    <p>Tasks</p>
+   )}
+   {menuState === 'Registration' && (
+     <RegistrationForm />
+   )}
   </> 
   )
 }
