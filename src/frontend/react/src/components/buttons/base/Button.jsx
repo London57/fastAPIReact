@@ -1,8 +1,8 @@
 import '../base/Button.css'
 
 
-export default function Button({onclick, text, isActive}) {
+export default function Button({onclick, text, classname}) {
     return (
-        <button className='button' onClick={onclick}>{text}</button>
+        <button className={classname} onClick={onclick}>{text}</button>
     )
 }

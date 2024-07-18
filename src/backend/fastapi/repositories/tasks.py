@@ -1,8 +1,8 @@
-from models.tasks import Tasks
+from models.tasks import Task
 from .base import SQLAlchemyRepository
 
 
 class TasksRepository(SQLAlchemyRepository):
-    model = Tasks
+    model = Task
 
     

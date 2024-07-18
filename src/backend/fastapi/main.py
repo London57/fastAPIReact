@@ -15,8 +15,6 @@ from auth.schemas import CreateUserSchema, ReadUserSchema
 async def lifespan(app):
     await create_tables()
     yield
-    import sys
-    sys.exit()
 
 
 app = FastAPI(
