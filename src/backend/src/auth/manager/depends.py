@@ -1,6 +1,6 @@
 from fastapi import Depends
 
-from auth.models.depends import get_user_db
+from src.auth.models.depends import get_user_db
 from .manager import UserManager
 
 

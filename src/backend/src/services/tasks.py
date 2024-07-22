@@ -1,9 +1,9 @@
-from schemas.tasks import TaskSchemaAdd
-from repositories.base import AbstractRepository
+from src.schemas.tasks import TaskSchemaAdd
+from src.repositories.base import AbstractRepository
 
 
 class TasksService:
-    def __init__(self, tasks_repo: AbstractRepository):
+    def __init__(self, tasks_repo):
         self.tasks_repo: AbstractRepository = tasks_repo()
 
     async def add_task(self, task: TaskSchemaAdd) -> int:

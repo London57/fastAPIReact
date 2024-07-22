@@ -2,12 +2,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 
-from api.dependencies import tasks_service
-from schemas.tasks import TaskSchemaAdd
-from services.tasks import TasksService
+from src.api.dependencies import tasks_service
+from src.schemas.tasks import TaskSchemaAdd
+from src.services.tasks import TasksService
 
-from auth.users import current_active_user
-from auth.models.models import User
+from src.auth.users import current_active_user
+from src.auth.models.models import User
 
 
 router = APIRouter(
@@ -19,8 +19,9 @@ router = APIRouter(
 async def add_task(
     task: TaskSchemaAdd,
     tasks_service: Annotated[TasksService, Depends(tasks_service)],
-    user: User = Depends(current_active_user),    
+    # user: User = Depends(current_active_user)
 ):  
+    print('handler')
     task_id = await tasks_service.add_task(task)
     return {
         "task_id": task_id,
@@ -30,7 +31,7 @@ async def add_task(
 @router.get("")
 async def get_tasks(
     tasks_service: Annotated[TasksService, Depends(tasks_service)],
-    user: User = Depends(current_active_user),
+    # user: User = Depends(current_active_user),
 ):
     tasks = await tasks_service.get_tasks()
     return tasks

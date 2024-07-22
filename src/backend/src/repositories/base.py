@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 from sqlalchemy import insert, select
-from db.db import async_session_maker
+from src.db.db import async_session_maker
 
 
 class AbstractRepository(ABC):
@@ -13,6 +13,22 @@ class AbstractRepository(ABC):
     async def find_all():
         raise NotImplementedError
     
+    @abstractmethod
+    async def get_with_filter_where():
+        return NotImplementedError
+
+def data_to_where(data: dict):
+	l = []
+	items = list(data.items())
+
+	for i, j in items:
+		if i != items[-1][0]:
+			l.append(f'{i} = {j} and ')
+		else: 
+			l.append(f'{i} = {j}')
+	return ''.join(l)
+
+print('in repo')
 
 class SQLAlchemyRepository(AbstractRepository):
     model = None
@@ -22,7 +38,8 @@ class SQLAlchemyRepository(AbstractRepository):
             statement = insert(self.model)\
                     .values(**data)
             res = await session.execute(statement)
-            await session.commit()
+            a = await session.flush()
+            print(a, 'fffffffffffffffffffffffff')
             print('res in repo->add_one')
             return res.lastrowid
         
@@ -33,3 +50,11 @@ class SQLAlchemyRepository(AbstractRepository):
             res = [row[0].to_read_model() for row in res.all()]
             print(f"res in repo->find_all: {res}")
             return res
+    
+    async def get_with_filter_where(self, data: dict):
+        async with async_session_maker() as session:
+            statement = select(self.model).where(data_to_where(data))
+            res = await session.execute(statement)
+            a = session.flush(res)
+            print(a)
+            

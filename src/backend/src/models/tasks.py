@@ -1,9 +1,9 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped
 
-from db.db import Base
-from schemas.tasks import TaskSchema
+from src.db.db import Base
+from src.schemas.tasks import TaskSchema
 
-
+print('v task')
 class Task(Base):
     __tablename__ = "tasks"
     title: Mapped[str]
@@ -17,4 +17,3 @@ class Task(Base):
 					employee_id = self.employee_id,
           employeer_id = self.employeer_id,
         )
-    	

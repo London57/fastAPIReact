@@ -23,7 +23,6 @@ export default function Form({fields, url_to_send_form, classname}) {
     let [errors, SetErrors] = useState([])
 
     let dict = {}
-    console.log(formFields)
     function onSubmit(e) {
         e.preventDefault()
         SetErrors([])
@@ -31,7 +30,6 @@ export default function Form({fields, url_to_send_form, classname}) {
         for(let [d, s] of formdata.entries()) {
             dict[d] = s
         }
-        console.log('axios')
         axios.post(url_to_send_form, dict)
         .then((res) => {
             if (res.status === 201) {
@@ -40,9 +38,6 @@ export default function Form({fields, url_to_send_form, classname}) {
         })
         .catch((r) => {
             let errorsList = []
-            console.log(r)
-            console.log('rrrrrrrr', )
-            console.log('tt', r.response.data.detail)
             if (r.response.data.detail === 'REGISTER_USER_ALREADY_EXISTS') {
                 errorsList.push(<p style={{'color': 'tomato', 'flex': '0 0 auto'}}>this email already exists</p>)
             }
