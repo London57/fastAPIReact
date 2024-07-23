@@ -1,11 +1,15 @@
+import sys, os
+
+# if __name__ == '__main__':
+#     sys.path.append()
+print(sys.path)
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-import os
-# os.environ['PYTHONPATH'] = 'C:/Users/IT_Corp/.vscode/projects/fastapi/fastAPIstart/src/backend/src'
-# import sys
-# print(sys.path)
+
+
 from src.db.create_tables import create_tables
 from src.api.routers import all_routers
 
@@ -29,13 +33,13 @@ for router in all_routers:
 app.include_router(
     fastapiUsers.get_register_router(ReadUserSchema, CreateUserSchema), # first param: response_model
     prefix='/auth',
-    tags=['Auuth'],
+    tags=['Registration'],
 )
 
 app.include_router(
     fastapiUsers.get_auth_router(auth_backend),
     prefix="/auth/jwt",
-    tags=["auth"],
+    tags=["Authentication"],
 )
 
 #CORS
@@ -48,7 +52,7 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    uvicorn.run(app="src.main:app", reload=True, port=8000)
-    
+    uvicorn.run(app="main:app", reload=True, port=8000)
+
 
 

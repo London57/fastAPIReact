@@ -38,9 +38,9 @@ class SQLAlchemyRepository(AbstractRepository):
             statement = insert(self.model)\
                     .values(**data)
             res = await session.execute(statement)
-            a = await session.flush()
-            print(a, 'fffffffffffffffffffffffff')
-            print('res in repo->add_one')
+            a = await session.commit()
+        
+            print('res in repo->add_one', a)
             return res.lastrowid
         
     async def find_all(self):
@@ -55,6 +55,5 @@ class SQLAlchemyRepository(AbstractRepository):
         async with async_session_maker() as session:
             statement = select(self.model).where(data_to_where(data))
             res = await session.execute(statement)
-            a = session.flush(res)
-            print(a)
+            session.commit(res)
             

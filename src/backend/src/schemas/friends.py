@@ -7,3 +7,8 @@ class FriendSchema(BaseModel):
 	subscriber_id: UUID
 	accepting_id: UUID
 	is_accept: bool
+
+class FriendSchemaAdd(BaseModel):
+	subscriber_id: UUID
+	accepting_id: UUID
+

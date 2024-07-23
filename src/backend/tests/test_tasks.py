@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
-
-from ADVSgdhmain import app
+from main import app
 
 
 client = TestClient(app)
