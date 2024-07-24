@@ -1,9 +1,3 @@
-import sys, os
-
-# if __name__ == '__main__':
-#     sys.path.append()
-print(sys.path)
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -48,7 +42,7 @@ app.add_middleware(
     allow_origins=['http://localhost:5173'],
     allow_credentials=True,
     allow_methods=['GET', 'POST'], 
-    allow_headers=['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
+    allow_headers=['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Cookie'],
 )
 
 if __name__ == "__main__":

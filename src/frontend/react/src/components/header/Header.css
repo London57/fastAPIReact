@@ -1,0 +1,31 @@
+html, body{
+	margin:0px;
+	padding:0px;
+}
+
+.header {
+	background-color: white;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	justify-content:space-evenly;
+	align-items:center;
+	
+	box-sizing: border-box;
+	width: 80em;
+
+	align-content: center;
+	border-bottom-right-radius: 3em;
+}
+
+.active {
+	background-color:rgb(191, 184, 175);
+}
+
+.header .link {
+	padding:5px;
+	border-radius: 5px;
+	font-size: 40px;
+	color: black;
+	text-decoration: none;
+}

@@ -1,0 +1,56 @@
+:active, :hover, :focus {
+	
+	outline: none;
+	outline-offset: 0;
+}
+.form {
+	width: 340px;
+	background-color: white;
+}
+
+.formElement {
+	display: flex;
+	flex-direction: column;
+}
+
+input {
+	border: none;
+	outline: none;
+	width:22em;
+	height: 3em;
+	border-bottom: 1px solid rgb(183, 173, 173);
+	margin-bottom: 2em;
+	margin-left: 2px;
+	margin-top: 4px;
+}
+
+input:focus {
+	border-bottom: 1px solid black;
+}
+
+input:hover {
+	border-bottom: 1.5px solid black;
+}
+
+input::placeholder {
+	font-size: 20px;
+	padding-left: 10px;
+	padding-top: 3px;
+	transition: 0.5s;
+}
+input:focus::placeholder {
+	font-size: 13px;
+	transform: translateY(-14px);
+}
+
+.buttonSubmit {
+	font-size: 1.5em;
+	padding: 6px 9px;
+	background-color: white;
+	border: 1px solid rgb(87, 80, 80);
+	border-radius: 3px;
+}
+
+.errorList {
+	max-width: 100%;
+}

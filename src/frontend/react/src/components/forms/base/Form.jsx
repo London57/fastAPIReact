@@ -1,27 +1,26 @@
 import axios from "axios"
 
-import '../RegistrationForm/RegistrationForm.css'
+import './Form.css'
 import { useState } from "react"
 
-export default function Form({fields, url_to_send_form, classname}) {
+export default function Form({fields, url_to_send_form, classname, postThen, postCatch}) {
     let formFields
     if (fields.length > 1) {
         formFields = Object.values(fields).map((field, index) => (
             
-            <div key={index}>
-                <label htmlFor={field}> {field} </label>
-                <input type="text" name={field} style={{marginBottom: '2em', marginLeft: '2px'}} />
+            <div key={index} className="formElement">
+                <input type="text" name={field} style={{marginBottom: '2em', marginLeft: '2px'}}  placeholder={field} />
             </div>))
     } else {
         const field = fields[0]
         formFields = 
-        <div>
-            <label htmlFor={field}> {field} </label>
-            <input type="text" name={field} style={{marginBottom: '2em', marginTop: '1.3em', marginLeft: '2px'}} />
+        <div className="formElement">
+            <input type="text" name={field} style={{marginBottom: '2em',
+            marginTop: '5px', marginLeft: '2px'}} placeholder={field}/>
         </div>
     }
     let [errors, SetErrors] = useState([])
-
+    
     let dict = {}
     function onSubmit(e) {
         e.preventDefault()
@@ -32,8 +31,8 @@ export default function Form({fields, url_to_send_form, classname}) {
         }
         axios.post(url_to_send_form, dict)
         .then((res) => {
-            if (res.status === 201) {
-                console.log('success')
+            if(postThen) {
+                postThen(res)
             }
         })
         .catch((r) => {
@@ -58,10 +57,10 @@ export default function Form({fields, url_to_send_form, classname}) {
     console.log(errors)
     let form = 
     <div>
-        <form onSubmit={onSubmit} className={classname}>
+        <form onSubmit={onSubmit} className={`form ${classname}`}>
             {formFields}
-            {errors && errors}
-        <button type="submit">submit</button>
+            {errors && <p className="errorList">{errors}</p>}
+        <button className="buttonSubmit" type="submit">submit</button>
         </form>
     </div>
 
