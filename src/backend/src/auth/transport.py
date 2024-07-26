@@ -1,3 +1,3 @@
-from fastapi_users.authentication import CookieTransport
+from fastapi_users.authentication import BearerTransport
 
-cookie_transport = CookieTransport(cookie_max_age=3600)
+bearer_transport = BearerTransport(tokenUrl="auth/jwt/login")

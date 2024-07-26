@@ -41,8 +41,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=['http://localhost:5173'],
     allow_credentials=True,
-    allow_methods=['GET', 'POST'], 
-    allow_headers=['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Cookie'],
+    allow_methods=['*'], 
+    # allow_headers=['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Cookie', 'Authorization'],
+    allow_headers=['*'],
 )
 
 if __name__ == "__main__":

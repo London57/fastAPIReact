@@ -31,7 +31,7 @@ async def add_task(
 @router.get("")
 async def get_tasks(
     tasks_service: Annotated[TasksService, Depends(tasks_service)],
-    # user: User = Depends(current_active_user),
+    user: User = Depends(current_active_user),
 ):
     tasks = await tasks_service.get_tasks()
     return tasks
