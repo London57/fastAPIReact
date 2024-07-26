@@ -3,6 +3,10 @@ html, body{
 	padding:0px;
 }
 
+.headerSection {
+	display: flex;
+}
+
 .header {
 	background-color: white;
 	height: 100px;
