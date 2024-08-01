@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from src.schemas.friends import FriendSchemaAdd
+from backend.src.models.friends import FriendSchemaAdd
 from src.services.friends import FriendService
 from .dependencies import friend_service
 

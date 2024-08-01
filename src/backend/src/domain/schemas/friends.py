@@ -11,4 +11,3 @@ class FriendSchema(BaseModel):
 class FriendSchemaAdd(BaseModel):
 	subscriber_id: UUID
 	accepting_id: UUID
-

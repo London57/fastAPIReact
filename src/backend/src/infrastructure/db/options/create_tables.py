@@ -1,4 +1,4 @@
-from src.models.friends import Friend
+from backend.src.models.friends import Friend
 from src.db.db import engine, Base
 
 async def create_tables():

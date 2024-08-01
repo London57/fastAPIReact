@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped
 
-from src.db.db import Base
-from src.schemas.tasks import TaskSchema
+from src.infrastructure.db.models import Base
+from src.domain.schemas.tasks import TaskSchema
 
 print('v task')
 class Task(Base):

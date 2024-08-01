@@ -3,8 +3,8 @@ from sqlalchemy import ForeignKey
 
 from uuid import UUID
 
-from src.db.db import Base
-from src.schemas.friends import FriendSchema
+from src.infrastructure.db.options.db import Base
+from src.infrastructure.db.models.friends import FriendSchema
 
 
 class Friend(Base):

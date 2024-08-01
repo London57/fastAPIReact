@@ -4,13 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 
-from src.db.create_tables import create_tables
-from src.api.routers import all_routers
+from src.infrastructure.db.options.create_tables import create_tables
+from src.presentation.api.routers import all_routers
 
 from src.auth.backend import auth_backend
 from src.auth.schemas import CreateUserSchema, ReadUserSchema
 from src.auth.users import fastapiUsers
 
+from fastapi.security import OAuth2PasswordRequestForm
 
 @asynccontextmanager
 async def lifespan(app):

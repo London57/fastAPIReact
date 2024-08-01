@@ -1,5 +1,5 @@
-from src.repositories.base import AbstractRepository
-from src.schemas.friends import FriendSchemaAdd
+from src.infrastructure.db.repositories.base import AbstractRepository
+from src.domain.schemas.friends import FriendSchemaAdd
 
 
 class FriendService:
@@ -9,6 +9,6 @@ class FriendService:
 	async def add_friend(self, data: FriendSchemaAdd):
 		data = data.model_dump()
 		data['is_accept'] = False
-		await self.friends_repo.add_one(data)
+		await self.friends_repo.add_one_friend(data)
 		
 		

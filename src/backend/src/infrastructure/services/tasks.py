@@ -1,5 +1,5 @@
-from src.schemas.tasks import TaskSchemaAdd
-from src.repositories.base import AbstractRepository
+from src.domain.schemas.tasks import TaskSchemaAdd
+from src.infrastructure.db.repositories.base import AbstractRepository
 
 
 class TasksService:
