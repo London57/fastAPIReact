@@ -1,10 +1,9 @@
-from src.infrastructure.db.repositories.base import AbstractRepository
 from src.domain.schemas.friends import FriendSchemaAdd
 
 
 class FriendService:
 	def __init__(self, friends_repository):
-		self.friends_repo: AbstractRepository = friends_repository()
+		self.friends_repo = friends_repository()
 	
 	async def add_friend(self, data: FriendSchemaAdd):
 		data = data.model_dump()

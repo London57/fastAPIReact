@@ -1,16 +1,19 @@
 from abc import ABCMeta
 from src.infrastructure.db.models.user import User
-from src.domain.schemas.user import UserSchemaAdd
+from src.domain.schemas.user import UserSchemaAdd, UserSchema
 
-from src.application.interfaces.repositories.user_auth import IUserAuthRepository
+from src.application.interfaces.repositories import IUserAuthRepository
 from .base import SQLAlchemyRepo
 
 from sqlalchemy import insert, select, or_
 
-from fastapi import HTTPException
-
 from passlib import hash
 
+from fastapi import FastAPI, Depends, HTTPException, status, Security
+from fastapi_jwt import JwtAccessBearer, JwtAuthorizationCredentials
+
+
+access_security = JwtAccessBearer(secret_key="very_secret_key")
 
 class UserAuthRepository(SQLAlchemyRepo, IUserAuthRepository):
 	model = User
@@ -39,9 +42,11 @@ class UserAuthRepository(SQLAlchemyRepo, IUserAuthRepository):
 		user = user.first()
 
 		if not user:
-			raise HTTPException(400, "invalid username or email")
+			return False, "invalid username or email"
 		
 		if not hash.argon2.verify(password, self.model.hashed_password):
-			raise HTTPException(400, 'invalid password')
+			return False, "invalid password"
 		
-		return user
+		return access_security.create_access_token(
+				subject=UserSchema(user).model_dump()
+			)
