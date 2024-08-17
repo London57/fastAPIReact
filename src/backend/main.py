@@ -7,10 +7,6 @@ from contextlib import asynccontextmanager
 from src.infrastructure.db.options.create_tables import create_tables
 from src.presentation.api.routers import all_routers
 
-from src.auth.backend import auth_backend
-from src.auth.schemas import CreateUserSchema, ReadUserSchema
-from src.auth.users import fastapiUsers
-
 from fastapi.security import OAuth2PasswordRequestForm
 
 @asynccontextmanager
@@ -25,17 +21,6 @@ app = FastAPI(
 for router in all_routers:
     app.include_router(router)
 
-app.include_router(
-    fastapiUsers.get_register_router(ReadUserSchema, CreateUserSchema), # first param: response_model
-    prefix='/auth',
-    tags=['Registration'],
-)
-
-app.include_router(
-    fastapiUsers.get_auth_router(auth_backend),
-    prefix="/auth/jwt",
-    tags=["Authentication"],
-)
 
 #CORS
 app.add_middleware(

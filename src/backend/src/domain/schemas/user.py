@@ -14,3 +14,7 @@ class UserSchemaAdd(BaseModel):
 	username: Username
 	email: Email
 	password: Hashed_password
+
+class UserLoginSchema(BaseModel):
+	username_or_email: Username | Email
+	password: Hashed_password

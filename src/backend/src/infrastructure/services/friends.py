@@ -1,9 +1,11 @@
 from src.domain.schemas.friends import FriendSchemaAdd
 
+from src.application.interfaces.repositories import IFriendRepository
+
 
 class FriendService:
 	def __init__(self, friends_repository):
-		self.friends_repo = friends_repository()
+		self.friends_repo: IFriendRepository = friends_repository()
 	
 	async def add_friend(self, data: FriendSchemaAdd):
 		data = data.model_dump()

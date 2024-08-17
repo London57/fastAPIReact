@@ -1,11 +1,13 @@
-from src.repositories.tasks import TasksRepository
-from src.services.tasks import TasksService
+from src.infrastructure.db.repositories.friends import FriendsRepository
+from src.infrastructure.services.friends import FriendService
 
-from src.repositories.friends import FriendsRepository
-from src.services.friends import FriendService
+from src.infrastructure.db.repositories.user_auth import UserAuthRepository
+from src.infrastructure.services.user_auth import UserAuthService
 
-def tasks_service():
-    return TasksService(TasksRepository)
+
 
 def friend_service():
     return FriendService(FriendsRepository)
+
+def user_auth_service():
+    return UserAuthService(UserAuthRepository)
