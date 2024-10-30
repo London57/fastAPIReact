@@ -1,8 +1,22 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
+import toml
 
-engine = create_async_engine("sqlite+aiosqlite:///sqlite.db", echo=True)
+
+config = toml.load("src/infrastructure/db/options/config.toml")
+database_config = config.get("PostgreSQL")
+
+
+
+driver = database_config.get("driver")
+user = database_config.get("user")
+password = database_config.get("password")
+host = database_config.get("host")
+port = database_config.get("port")
+database_name = database_config.get("database_name")
+
+engine = create_async_engine(f"postgresql+{driver}://{user}:{password}@{host}:{port}/{database_name}", echo=True)
 async_session_maker = async_sessionmaker(engine)
 
 async def get_async_session():

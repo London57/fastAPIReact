@@ -5,9 +5,11 @@ from passlib import hash
 
 from src.domain.schemas.user import UserSchema, UserSchemaAdd, UserLoginSchema
 
-from backend.src.infrastructure.security.is_authenticated import access_security
+from src.infrastructure.security.is_authenticated import access_security
 
 from src.application.interfaces.repositories import IUserAuthRepository
+
+from src.infrastructure.db.options.db import get_async_session
 
 
 class UserAuthService:
@@ -17,7 +19,7 @@ class UserAuthService:
 	async def register_user(self, form: UserSchemaAdd):
 		data = form.model_dump()
 		print('data in user_auth repo', data)
-		return self.user_repo.create_user(data)
+		await self.user_repo.create_user(data)
 		
 	async def authenticate_user(self, form: UserLoginSchema):
 		user = self.user_repo.get_user_by_email_or_username(form.username_or_email)

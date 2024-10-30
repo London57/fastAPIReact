@@ -17,13 +17,13 @@ access_security = JwtAccessBearer(secret_key="very_secret_key")
 
 class UserAuthRepository(SQLAlchemyRepo, IUserAuthRepository):
 	model = User
-
-	async def create_user(self, data: UserSchemaAdd):
-		data_dict = data.model_dump()
-		statement = insert(self.model).values(**data_dict)
+	
+	async def create_user(self, data: dict):
+		statement = insert(self.model).values(**data)
 		res = await self.session.execute(statement)
 		self.session.commit()
-		return res.lastrowid
+		print('AAAAAAAAAAAAAAAAAAAAA', res.lastrowid)
+		return {'data': 'ok'}
 	
 	async def get_user_by_email_or_username(self, username_or_email: Email | Username):
 		get_user_by_email = select(self.model).where(

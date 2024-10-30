@@ -11,16 +11,16 @@ auth_router = APIRouter(
 	tags=['Auth'],
 )
 
-@auth_router('/registration')
+@auth_router.post('/registration')
 async def registration(
 	form_data: UserSchemaAdd,
 	user_auth_service: UserAuthService = Depends(user_auth_service),
 ):
-	return user_auth_service.register_user(form_data)
+	await user_auth_service.register_user(form_data)
 
-@auth_router('/login')
+@auth_router.post('/login')
 async def login(
 	form_data: UserLoginSchema,
 	user_auth_service: UserAuthService = Depends(user_auth_service),
 ):
-	return user_auth_service.authenticate_user(form_data) #token
+	await user_auth_service.authenticate_user(form_data) #return token

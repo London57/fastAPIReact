@@ -4,13 +4,13 @@ from sqlalchemy import ForeignKey
 from uuid import UUID
 
 from src.infrastructure.db.options.db import Base
-from src.infrastructure.db.models.friends import FriendSchema
+from src.domain.schemas.friends import FriendSchema
 
 
 class Friend(Base):
 		__tablename__ = "friends"
-		subscriber_id: Mapped[UUID] = mapped_column(ForeignKey('user.id'))
-		accepting_id: Mapped[UUID] = mapped_column(ForeignKey('user.id'))
+		subscriber_id: Mapped[UUID] = mapped_column(ForeignKey('users.id'))
+		accepting_id: Mapped[UUID] = mapped_column(ForeignKey('users.id'))
 		is_accept: Mapped[bool]
 			
 		def to_read_model(self) -> FriendSchema:
